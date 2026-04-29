@@ -2,27 +2,36 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
-<!-- IMPORTANT FOR MOBILE -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Birthday Billi ❤️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-
-html,body{
+body{
+background:linear-gradient(135deg,#ff9ecb,#ffc3e0,#ffd6ec);
+color:#fff;
 overflow-x:hidden;
 scroll-behavior:smooth;
-background:#000;
-color:#fff;
 }
 
-/* FIXED MOBILE HEIGHT */
+/* 3D BACKGROUND */
+.bg{position:fixed;width:100%;height:100%;z-index:-1}
+.sorry{
+position:absolute;
+color:rgba(255,255,255,0.2);
+font-weight:bold;
+animation:float linear infinite;
+}
+@keyframes float{
+0%{transform:translateY(100vh) scale(0.5)}
+100%{transform:translateY(-100vh) scale(1.2)}
+}
+
+/* LAYER */
 .layer{
-min-height:100svh;
+height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -31,60 +40,31 @@ text-align:center;
 padding:20px;
 }
 
-/* BACKGROUND */
-body::before{
-content:"";
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:url("Snapchat-666290107.jpg") no-repeat center/cover;
-opacity:0.80;
-z-index:-2;
-}
-
-body::after{
-content:"";
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.45);
-z-index:-1;
-}
-
-/* TEXT */
 h1{
-font-size:2.2rem;
+font-size:3rem;
 background:linear-gradient(45deg,#ff4d88,#ff85a2);
 -webkit-background-clip:text;
 color:transparent;
 }
 
-p{
-max-width:90%;
-line-height:1.6;
-margin-top:10px;
-font-size:0.95rem;
-}
+p{max-width:700px;line-height:1.7;margin-top:10px;color:#fff}
 
-/* BUTTON (TOUCH FRIENDLY) */
+/* BUTTON */
 .btn{
 margin-top:20px;
-padding:14px 28px;
+padding:12px 25px;
 border:none;
 border-radius:30px;
 background:#ff4d88;
 color:#fff;
-font-size:1rem;
 cursor:pointer;
+transition:0.3s;
 }
+.btn:hover{transform:scale(1.1)}
 
 /* TYPING */
 .typing{
-border-right:2px solid #fff;
+border-right:3px solid #fff;
 white-space:nowrap;
 overflow:hidden;
 width:0;
@@ -93,7 +73,7 @@ animation:typing 4s steps(40,end) forwards, blink 0.7s infinite;
 @keyframes typing{to{width:100%}}
 @keyframes blink{50%{border-color:transparent}}
 
-/* GALLERY MOBILE PERFECT */
+/* GALLERY */
 .gallery{
 display:flex;
 gap:10px;
@@ -101,20 +81,16 @@ flex-wrap:wrap;
 justify-content:center;
 margin-top:20px;
 }
-
-.gallery img{
-width:42%;
-max-width:180px;
-aspect-ratio:1/1;
-object-fit:cover;
-border-radius:12px;
+.gallery div{
+width:100px;height:100px;
+background:rgba(255,255,255,0.3);
+border-radius:10px;
 }
 
-/* HEARTS (LESS FOR PERFORMANCE) */
+/* HEARTS */
 .heart{
 position:fixed;
 color:#ff4d88;
-font-size:14px;
 animation:rise 5s linear infinite;
 }
 @keyframes rise{
@@ -126,7 +102,7 @@ animation:rise 5s linear infinite;
 /* CONFETTI */
 .confetti{
 position:fixed;
-width:8px;height:8px;
+width:10px;height:10px;
 animation:fall 4s linear infinite;
 }
 @keyframes fall{
@@ -136,25 +112,21 @@ animation:fall 4s linear infinite;
 
 /* SECRET */
 .hidden{display:none;margin-top:20px}
-
-/* SMALL DEVICES */
-@media(max-width:400px){
-h1{font-size:1.8rem;}
-.gallery img{width:45%;}
-}
 </style>
 </head>
 
 <body>
 
-<!-- PAGE 1 -->
+<div class="bg" id="bg"></div>
+
+<!-- LAYER 1 (BIRTHDAY) -->
 <section class="layer">
 <h1>Happy Birthday, Billi 🎂💖</h1>
 <p class="typing">Sanjivani… I wish you all the happiness in the world ❤️</p>
 <button class="btn" onclick="scrollNext()">Next</button>
 </section>
 
-<!-- PAGE 2 -->
+<!-- LAYER 2 -->
 <section class="layer">
 <h1>I'm Sorry 💔</h1>
 <p>
@@ -165,22 +137,19 @@ I just wanted to say sorry from my heart.
 <button class="btn" onclick="scrollNext()">Next</button>
 </section>
 
-<!-- PAGE 3 -->
+<!-- LAYER 3 -->
 <section class="layer">
 <h1>Memories 🌸</h1>
 <p>Some moments always stay special…</p>
 
 <div class="gallery">
-<img src="IMG-20231117-WA0004.jpg">
-<img src="Snapchat-1565839030.jpg">
-<img src="snapshot.jpg">
-<img src="Snapchat-1706058109.jpg">
+<div></div><div></div><div></div><div></div>
 </div>
 
 <button class="btn" onclick="scrollNext()">Next</button>
 </section>
 
-<!-- PAGE 4 -->
+<!-- LAYER 4 -->
 <section class="layer">
 <h1>No Expectations ❤️</h1>
 <p>
@@ -198,6 +167,18 @@ And… I’m really sorry ❤️</p>
 
 <script>
 
+/* BACKGROUND SORRY */
+const bg=document.getElementById("bg");
+for(let i=0;i<25;i++){
+let s=document.createElement("div");
+s.className="sorry";
+s.innerText="SORRY";
+s.style.left=Math.random()*100+"%";
+s.style.fontSize=(20+Math.random()*60)+"px";
+s.style.animationDuration=(6+Math.random()*10)+"s";
+bg.appendChild(s);
+}
+
 /* SCROLL */
 function scrollNext(){
 window.scrollBy({top:window.innerHeight,behavior:"smooth"});
@@ -209,7 +190,7 @@ document.getElementById("secret").style.display="block";
 confetti();
 }
 
-/* HEARTS (OPTIMIZED) */
+/* HEARTS */
 setInterval(()=>{
 let h=document.createElement("div");
 h.className="heart";
@@ -217,15 +198,16 @@ h.innerText="❤";
 h.style.left=Math.random()*100+"%";
 document.body.appendChild(h);
 setTimeout(()=>h.remove(),5000);
-},500);
+},300);
 
 /* CONFETTI */
 function confetti(){
-for(let i=0;i<80;i++){
+for(let i=0;i<100;i++){
 let c=document.createElement("div");
 c.className="confetti";
 c.style.left=Math.random()*100+"%";
 c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+c.style.animationDuration=(2+Math.random()*3)+"s";
 document.body.appendChild(c);
 setTimeout(()=>c.remove(),4000);
 }
