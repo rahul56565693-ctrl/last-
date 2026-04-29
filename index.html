@@ -1,3 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Billi ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{
+background:linear-gradient(135deg,#ff9ecb,#ffc3e0,#ffd6ec);
+color:#fff;
+overflow-x:hidden;
+scroll-behavior:smooth;
+}
+
+/* 3D BACKGROUND */
+.bg{position:fixed;width:100%;height:100%;z-index:-1}
+.sorry{
+position:absolute;
+color:rgba(255,255,255,0.2);
+font-weight:bold;
+animation:float linear infinite;
+}
+@keyframes float{
+0%{transform:translateY(100vh) scale(0.5)}
+100%{transform:translateY(-100vh) scale(1.2)}
+}
+
+/* LAYER */
+.layer{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+padding:20px;
+}
+
+h1{
+font-size:3rem;
+background:linear-gradient(45deg,#ff4d88,#ff85a2);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+p{max-width:700px;line-height:1.7;margin-top:10px;color:#fff}
+
+/* BUTTON */
+.btn{
+margin-top:20px;
+padding:12px 25px;
+border:none;
+border-radius:30px;
+background:#ff4d88;
+color:#fff;
+cursor:pointer;
+transition:0.3s;
+}
+.btn:hover{transform:scale(1.1)}
+
+/* TYPING */
+.typing{
+border-right:3px solid #fff;
+white-space:nowrap;
+overflow:hidden;
+width:0;
+animation:typing 4s steps(40,end) forwards, blink 0.7s infinite;
+}
+@keyframes typing{to{width:100%}}
+@keyframes blink{50%{border-color:transparent}}
+
+/* GALLERY */
+.gallery{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+justify-content:center;
+margin-top:20px;
+}
+.gallery div{
+width:100px;height:100px;
+background:rgba(255,255,255,0.3);
+border-radius:10px;
+}
+
+/* HEARTS */
+.heart{
+position:fixed;
+color:#ff4d88;
+animation:rise 5s linear infinite;
+}
+@keyframes rise{
+0%{transform:translateY(100vh);opacity:0}
+50%{opacity:1}
 100%{transform:translateY(-10vh);opacity:0}
 }
 
@@ -54,7 +152,7 @@ I just wanted to say sorry from my heart.
 <button class="btn" onclick="scrollNext()">Next</button>
 </section>
 
-<!-- PAGE 4 -->
+<!-- LAYER 4 -->
 <section class="layer">
 <h1>No Expectations ❤️</h1>
 <p>
@@ -72,6 +170,18 @@ And… I’m really sorry ❤️</p>
 
 <script>
 
+/* BACKGROUND SORRY */
+const bg=document.getElementById("bg");
+for(let i=0;i<25;i++){
+let s=document.createElement("div");
+s.className="sorry";
+s.innerText="SORRY";
+s.style.left=Math.random()*100+"%";
+s.style.fontSize=(20+Math.random()*60)+"px";
+s.style.animationDuration=(6+Math.random()*10)+"s";
+bg.appendChild(s);
+}
+
 /* SCROLL */
 function scrollNext(){
 window.scrollBy({top:window.innerHeight,behavior:"smooth"});
@@ -83,7 +193,7 @@ document.getElementById("secret").style.display="block";
 confetti();
 }
 
-/* HEARTS (OPTIMIZED) */
+/* HEARTS */
 setInterval(()=>{
 let h=document.createElement("div");
 h.className="heart";
@@ -91,15 +201,16 @@ h.innerText="❤";
 h.style.left=Math.random()*100+"%";
 document.body.appendChild(h);
 setTimeout(()=>h.remove(),5000);
-},500);
+},300);
 
 /* CONFETTI */
 function confetti(){
-for(let i=0;i<80;i++){
+for(let i=0;i<100;i++){
 let c=document.createElement("div");
 c.className="confetti";
 c.style.left=Math.random()*100+"%";
 c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+c.style.animationDuration=(2+Math.random()*3)+"s";
 document.body.appendChild(c);
 setTimeout(()=>c.remove(),4000);
 }
