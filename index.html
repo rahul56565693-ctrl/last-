@@ -76,15 +76,23 @@ animation:typing 4s steps(40,end) forwards, blink 0.7s infinite;
 /* GALLERY */
 .gallery{
 display:flex;
-gap:10px;
+gap:15px;
 flex-wrap:wrap;
 justify-content:center;
 margin-top:20px;
 }
-.gallery div{
-width:100px;height:100px;
-background:rgba(255,255,255,0.3);
-border-radius:10px;
+
+.gallery img{
+width:204px;
+height:132px;
+object-fit:cover;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,0.3);
+transition:0.3s;
+}
+
+.gallery img:hover{
+transform:scale(1.05);
 }
 
 /* HEARTS */
